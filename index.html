@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CanvasPro | Premium Canvas Subscriptions</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* === Global Styles === */
+        :root {
+            --primary: #2D3748;  /* Navy */
+            --accent: #38B2AC;    /* Teal */
+            --light-accent: #E6FFFA;
+            --gray: #EDF2F7;
+            --dark-gray: #718096;
+            --white: #FFFFFF;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--primary);
+            background-color: var(--white);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .btn-primary {
+            background: var(--accent);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #2C7A7B;
+            transform: translateY(-2px);
+        }
+        
+        .btn-outline {
+            border: 2px solid var(--accent);
+            color: var(--accent);
+        }
+        
+        .btn-outline:hover {
+            background: var(--light-accent);
+        }
+        
+        .section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .section-subtitle {
+            color: var(--dark-gray);
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 50px;
+        }
+        
+        /* === Navbar === */
+        .navbar {
+            background: var(--white);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+        }
+        
+        .navbar-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+        
+        .nav-links a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+        
+        /* === Hero Section === */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1578926375605-eaf7559b1458?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 180px 0 100px;
+            text-align: center;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero-title {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+        
+        .hero-secondary-btn {
+            color: white;
+            text-decoration: underline;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        /* === Pricing Section === */
+        .plans {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 50px;
+        }
+        
+        .plan {
+            background: var(--white);
+            border-radius: 10px;
+            padding: 40px 30px;
+            width: 100%;
+            max-width: 350px;
+            position: relative;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s;
+        }
+        
+        .plan:hover {
+            transform: translateY(-10px);
+        }
+        
+        .popular-plan {
+            border-top: 4px solid var(--accent);
+        }
+        
+        .badge {
+            position: absolute;
+            top: -12px;
+            right: 20px;
+            background: var(--accent);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        
+        .plan-title {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .price {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+        
+        .price small {
+            font-size: 1rem;
+            color: var(--dark-gray);
+            font-weight: normal;
+        }
+        
+        .features {
+            list-style: none;
+            margin: 25px 0 35px;
+            text-align: left;
+        }
+        
+        .features li {
+            margin: 15px 0;
+            padding-left: 30px;
+            position: relative;
+        }
+        
+        .features li:before {
+            content: "✓";
+            color: var(--accent);
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+        
+        .savings {
+            color: var(--accent);
+            font-weight: bold;
+            margin: 20px 0;
+            font-size: 1.1rem;
+        }
+        
+        /* === Features Section === */
+        .features-section {
+            background: var(--gray);
+        }
+        
+        .features-container {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+        
+        .features-image {
+            flex: 1;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .features-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .features-content {
+            flex: 1;
+        }
+        
+        .features-list {
+            list-style: none;
+        }
+        
+        .feature-item {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .feature-icon {
+            background: var(--light-accent);
+            color: var(--accent);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+        
+        .feature-text h3 {
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+        }
+        
+        /* === Testimonials === */
+        .testimonials {
+            background: var(--white);
+        }
+        
+        .testimonial-container {
+            display: flex;
+            gap: 30px;
+            overflow-x: auto;
+            padding: 20px 0;
+            scroll-snap-type: x mandatory;
+        }
+        
+        .testimonial {
+            min-width: 350px;
+            background: var(--white);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            scroll-snap-align: start;
+        }
+        
+        .testimonial-content {
+            font-style: italic;
+            margin-bottom: 20px;
+            color: var(--dark-gray);
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        
+        .author-info h4 {
+            font-size: 1rem;
+            margin-bottom: 5px;
+        }
+        
+        .author-info p {
+            color: var(--dark-gray);
+            font-size: 0.9rem;
+        }
+        
+        /* === Trust Badges === */
+        .trust-badges {
+            background: var(--gray);
+            padding: 40px 0;
+        }
+        
+        .badges-container {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            flex-wrap: wrap;
+        }
+        
+        .badge-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .badge-icon {
+            font-size: 1.8rem;
+            color: var(--accent);
+        }
+        
+        /* === Contact Section === */
+        .contact-container {
+            display: flex;
+            gap: 50px;
+        }
+        
+        .contact-info {
+            flex: 1;
+        }
+        
+        .contact-method {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .contact-icon {
+            background: var(--light-accent);
+            color: var(--accent);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+        
+        .contact-text h3 {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+        
+        .contact-text a {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .contact-form {
+            flex: 1;
+            background: var(--gray);
+            padding: 40px;
+            border-radius: 10px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .form-group textarea {
+            min-height: 120px;
+        }
+        
+        /* === Footer === */
+        .footer {
+            background: var(--primary);
+            color: white;
+            padding: 60px 0 30px;
+        }
+        
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+        }
+        
+        .footer-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            display: block;
+        }
+        
+        .footer-about p {
+            opacity: 0.8;
+            margin-bottom: 20px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-link {
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+        
+        .social-link:hover {
+            background: var(--accent);
+            transform: translateY(-3px);
+        }
+        
+        .footer-links h3 {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            opacity: 0.9;
+        }
+        
+        .footer-links ul {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: white;
+            opacity: 0.8;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .footer-links a:hover {
+            opacity: 1;
+            padding-left: 5px;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+        
+        /* === Responsive Styles === */
+        @media (max-width: 992px) {
+            .features-container,
+            .contact-container {
+                flex-direction: column;
+            }
+            
+            .footer-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .navbar-container {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .hero-title {
+                font-size: 2.2rem;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .plans {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .plan {
+                max-width: 100%;
+            }
+            
+            .footer-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container navbar-container">
+            <a href="#" class="logo">CanvasPro</a>
+            <div class="nav-links">
+                <a href="#pricing">Plans</a>
+                <a href="#features">Features</a>
+                <a href="#testimonials">Testimonials</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <a href="#pricing" class="btn btn-primary">Get Started</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container hero-content">
+            <h1 class="hero-title">Premium Canvases, Delivered On Your Schedule</h1>
+            <p class="hero-subtitle">Subscribe and save. Cancel anytime.</p>
+            <div class="hero-buttons">
+                <a href="#pricing" class="btn btn-primary">View Plans</a>
+                <a href="tel:+2347050319910" class="hero-secondary-btn">
+                    <i class="fas fa-phone"></i> Need help? Call +234 705 031 9910
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="section">
+        <div class="container">
+            <h2 class="section-title">Choose Your Plan</h2>
+            <p class="section-subtitle">Flexible options for every need. Cancel anytime.</p>
+            
+            <div class="plans">
+                <!-- Weekly Plan -->
+                <div class="plan">
+                    <h3 class="plan-title">Weekly</h3>
+                    <div class="price">₦1,000 <small>/week</small></div>
+                    <div class="savings">₦1,000 per canvas</div>
+                    <ul class="features">
+                        <li>1 premium canvas per week</li>
+                        <li>Free nationwide shipping</li>
+                        <li>No long-term commitment</li>
+                        <li>Pause or cancel anytime</li>
+                    </ul>
+                    <a href="#" class="btn btn-outline">Select Plan</a>
+                </div>
+                
+                <!-- Monthly Plan (Popular) -->
+                <div class="plan popular-plan">
+                    <span class="badge">Most Popular</span>
+                    <h3 class="plan-title">Monthly</h3>
+                    <div class="price">₦5,000 <small>/month</small></div>
+                    <div class="savings">Save 15% (₦1,250 per canvas)</div>
+                    <ul class="features">
+                        <li>4 canvases per month</li>
+                        <li>Free nationwide shipping</li>
+                        <li>Priority customer support</li>
+                        <li>Pause or cancel anytime</li>
+                    </ul>
+                    <a href="#" class="btn btn-primary">Get Started</a>
+                </div>
+                
+                <!-- Yearly Plan (Best Value) -->
+                <div class="plan">
+                    <span class="badge">Best Value</span>
+                    <h3 class="plan-title">Yearly</h3>
+                    <div class="price">₦60,000 <small>/year</small></div>
+                    <div class="savings">Save ₦12,000 (₦1,042 per canvas)</div>
+                    <ul class="features">
+                        <li>48 canvases per year</li>
+                        <li>Free nationwide shipping</li>
+                        <li>24/7 priority support</li>
+                        <li>Exclusive designs access</li>
+                    </ul>
+                    <a href="#" class="btn btn-outline">Select Plan</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="section features-section">
+        <div class="container">
+            <h2 class="section-title">Why Choose CanvasPro?</h2>
+            <p class="section-subtitle">We're committed to providing the best canvas experience</p>
+            
+            <div class="features-container">
+                <div class="features-image">
+                    <img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Premium Canvas">
+                </div>
+                <div class="features-content">
+                    <ul class="features-list">
+                        <li class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-palette"></i>
+                            </div>
+                            <div class="feature-text">
+                                <h3>Premium Quality</h3>
+                                <p>Gallery-grade cotton canvases stretched on durable pine frames. Perfect for professional artists and hobbyists alike.</p>
+                            </div>
+                        </li>
+                        <li class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-truck"></i>
+                            </div>
+                            <div class="feature-text">
+                                <h3>Free Shipping</h3>
+                                <p>Free nationwide delivery on all orders. Fast and reliable shipping to your doorstep.</p>
+                            </div>
+                        </li>
+                        <li class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-calendar-alt"></i>
+                            </div>
+                            <div class="feature-text">
+                                <h3>Flexible Scheduling</h3>
+                                <p>Skip, pause, or cancel shipments anytime. You're in complete control of your subscription.</p>
+                            </div>
+                        </li>
+                        <li class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-headset"></i>
+                            </div>
+                            <div class="feature-text">
+                                <h3>24/7 Support</h3>
+                                <p>Our customer service team is available round the clock to assist you with any questions.</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trust Badges -->
+    <section class="trust-badges">
+        <div class="container badges-container">
+            <div class="badge-item">
+                <div class="badge-icon">
+                    <i class="fas fa-lock"></i>
+                </div>
+                <div>
+                    <h3>Secure Payments</h3>
+                    <p>100% protected transactions</p>
+                </div>
+            </div>
+            <div class="badge-item">
+                <div class="badge-icon">
+                    <i class="fas fa-undo"></i>
+                </div>
+                <div>
+                    <h3>Easy Returns</h3>
+                    <p>30-day satisfaction guarantee</p>
+                </div>
+            </div>
+            <div class="badge-item">
+                <div class="badge-icon">
+                    <i class="fas fa-star"></i>
+                </div>
+                <div>
+                    <h3>5-Star Reviews</h3>
+                    <p>Trusted by 1,000+ artists</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section id="testimonials" class="section testimonials">
+        <div class="container">
+            <h2 class="section-title">What Our Customers Say</h2>
+            <p class="section-subtitle">Don't just take our word for it</p>
+            
+            <div class="testimonial-container">
+                <div class="testimonial">
+                    <p class="testimonial-content">
+                        "The quality of these canvases is unmatched! I've been using CanvasPro for my gallery work and the yearly subscription saved me ₦12,000 last year alone."
+                    </p>
+                    <div class="testimonial-author">
+                        <img src="https://randomuser.me/api/portraits/women/43.jpg" alt="Amina Bello" class="author-avatar">
+                        <div class="author-info">
+                            <h4>Amina Bello</h4>
+                            <p>Professional Artist, Lagos</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial">
+                    <p class="testimonial-content">
+                        "Customer service solved my delivery issue in 5 minutes. I'm impressed with how quickly they respond and resolve problems."
+                    </p>
+                    <div class="testimonial-author">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Tunde Okafor" class="author-avatar">
+                        <div class="author-info">
+                            <h4>Tunde Okafor</h4>
+                            <p>Art Teacher, Abuja</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial">
+                    <p class="testimonial-content">
+                        "As a student, the monthly plan gives me affordable access to quality materials. The canvases hold acrylics perfectly without warping."
+                    </p>
+                    <div class="testimonial-author">
+                        <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Chioma Eze" class="author-avatar">
+                        <div class="author-info">
+                            <h4>Chioma Eze</h4>
+                            <p>Fine Arts Student, Enugu</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section">
+        <div class="container">
+            <h2 class="section-title">Get In Touch</h2>
+            <p class="section-subtitle">We'd love to hear from you</p>
+            
+            <div class="contact-container">
+                <div class="contact-info">
+                    <div class="contact-method">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h3>Phone</h3>
+                            <a href="tel:+2347050319910">+234 705 031 9910</a>
+                        </div>
+                    </div>
+                    <div class="contact-method">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h3>Email</h3>
+                            <a href="mailto:codingandgraphicsexperys@gmail.com">codingandgraphicsexperys@gmail.com</a>
+                        </div>
+                    </div>
+                    <div class="contact-method">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h3>Office</h3>
+                            <p>123 Art District, Victoria Island, Lagos</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form>
+                        <div class="form-group">
+                            <label for="name">Full Name</label>
+                            <input type="text" id="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Your Message</label>
+                            <textarea id="message" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-about">
+                    <a href="#" class="footer-logo">CanvasPro</a>
+                    <p>Premium canvas subscriptions for artists of all levels. Quality materials delivered to your door.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#pricing">Pricing</a></li>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#testimonials">Testimonials</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h3>Support</h3>
+                    <ul>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Shipping Policy</a></li>
+                        <li><a href="#">Returns</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h3>Contact Info</h3>
+                    <ul>
+                        <li><i class="fas fa-phone"></i> +234 705 031 9910</li>
+                        <li><i class="fas fa-envelope"></i> codingandgraphicsexperys@gmail.com</li>
+                        <li><i class="fas fa-map-marker-alt"></i> 123 Art District, VI, Lagos</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 CanvasPro. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
